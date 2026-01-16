@@ -2,7 +2,7 @@
 
 """
 
-Options functions
+questions functions
 
 """
 
