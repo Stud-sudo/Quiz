@@ -1,3 +1,5 @@
+from questions import * 
+from options import option_1, option_2, option_3, option_4, option_5
 
 
 def welcoming():
@@ -14,6 +16,7 @@ print(welcoming())
 
 
 
+
 def get_questions():
     """
     Return a list of questions
@@ -22,59 +25,52 @@ def get_questions():
 
     return [
         {
-            "question": "What is the capital of France?",
-            "options": ["1. Berlin", "2. Madrid", "3. Paris", "4. Rome"],
+            "question": question_1,
+            "options": option_1,
             "answer": "3"
         },
         {
-            "question": "Which language is mainly used for web structure?",
-            "options": ["1. Python", "2. HTML", "3. Java", "4. C++"],
+            "question": quesiton_2,
+            "options": option_2,
             "answer": "2"
         },
         {
-            "question": "What does CPU stand for?",
-            "options": [
-                "1. Central Processing Unit",
-                "2. Computer Personal Unit",
-                "3. Central Performance Utility",
-                "4. Control Processing Unit"
-            ],
+            "question": quesiton_3,
+            "options": option_3,
             "answer": "1"
         },
         {
-            "question": "Which symbol is used for comments in Python?",
-            "options": ["1. //", "2. <!-- -->", "3. #", "4. /* */"],
+            "question": quesiton_4,
+            "options": option_4,
             "answer": "3"
         },
         {
-            "question": "Which company manages Python?",
-            "options": [
-                "1. Microsoft",
-                "2. Google",
-                "3. Apple",
-                "4. Python Software Foundation"
-            ],
+            "question": quesiton_5,
+            "options": option_5,
             "answer": "4"
         }
     ]
 
 
-def get_user_answer():
-    
-    while True:
-        answer = input("Enter your answer from 1:4 :")
-        if answer in ["1","2","3","4"]:
-            return answer
-        print("Not right, try again")
 
 
-def run_quiz():
-    questions = get_questions()
+# def run_quiz():
+#     score:int = 0
+#     questions = get_questions()
 
-    for question in questions:
-        print(question["question"])
-        for options in question["options"]:
-            print(options)
+#     for question in questions:
+#         print(question["question"])
+#         for options in question["options"]:
+#             print(options)
+#         user_input = input("Select your anwer from (1-4):")
+
+#         if user_input == question["answer"]:
+#             score += 1
 
 
-run_quiz()
+
+#     print(f"You scored {score} out of {len(questions)}")
+#     print("Thanks for taking the quiz!")
+
+
+# run_quiz()
