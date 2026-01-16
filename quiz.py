@@ -63,6 +63,11 @@ def get_questions():
 
 
 
+"""
+This function is for later purpose only
+
+"""
+
 # def run_quiz():
 #     score:int = 0
 #     questions = get_questions()
