@@ -1,5 +1,11 @@
 
 
+"""
+
+Options functions
+
+"""
+
 def q_1():
     return "what is the capital of France?"
 

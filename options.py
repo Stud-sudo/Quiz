@@ -1,6 +1,10 @@
 
 
+"""
 
+Options functions
+
+"""
 
 def op_1(op_1:list) -> list:
     return op_1
@@ -44,3 +48,5 @@ option_5 = op_5([
                 "3. Apple",
                 "4. Python Software Foundation"
             ])
+
+
