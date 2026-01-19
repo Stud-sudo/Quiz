@@ -1,6 +1,7 @@
 from questions import question_1, question_2,question_3,question_4,question_5
 from options import option_1, option_2, option_3, option_4, option_5
 import argparse
+import sys
 
 
 """
@@ -79,11 +80,14 @@ def running_quiz():
         print(question["question"])
         for options in question["options"]:
             print(options)
-        user_input = input("Select your anwer from (1-4):")
+        user_input = input("Select your anwer from (1-4) and press q to quit:")
 
+    
         if user_input == question["answer"]:#
             print("✅ Correct!")
             score += 1
+        elif user_input == 'q':
+            sys.exit()
         else:
              print(f"❌ Wrong!")
 
