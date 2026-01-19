@@ -1,41 +1,15 @@
 
 
 """
-
-questions functions:
- new changes
-
+Questions for the Holton College Quiz
 """
 
-def q_1():
-    return "what is the capital of France?"
 
-question_1 = q_1()
-
-
-def q_2():
-    return "Which language is mainly used for web structure?"
-
-quesiton_2 =  q_2()
-
-
-def q_3():
-    return "WHat does CPU stand for?"
-
-quesiton_3 = q_3
-
-def q_4():
-    return "Which symbol is used for comments in Python?"
-
-quesiton_4 = q_4()
-
-
-def q_5():
-    return "Which company managers Python?"
-
-quesiton_5 = q_5()
-
-
+question_1 = "What is the capital of France?"
+question_2 = "Which language is mainly used for web structure?"
+question_3 = "What does RAM stand for?"
+question_4 = "What is the national flower of Japan?"
+question_5 = "Which company manages Python?"
 
 if __name__ == '__main__':
-    print("Working")
+    print("Questions file loaded successfully.")
