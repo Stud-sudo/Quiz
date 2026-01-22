@@ -2,6 +2,10 @@ import argparse
 import sys
 import random
 import time
+import json
+import pathlib
+import os
+from datetime import datetime
 
 
 def welcoming():
@@ -53,6 +57,35 @@ def show_score_report(score, total_questions, total_time):
     return report
 
 
+def save_results_json(score, total_questions, total_time):
+    data = {
+        "score": score,
+        "total_questions": total_questions,
+        "percentage": (score / total_questions) * 100,
+        "time_taken_seconds": total_time,
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+    filename = "results.json"
+
+    # Create file if missing
+    path = pathlib.Path(filename)
+    if not path.exists():
+        with open(filename, "w") as f:
+            json.dump({"attempts": []}, f, indent=4)
+
+    # Load existing data
+    with open(filename, "r") as f:
+        existing = json.load(f)
+
+    # Append new attempt
+    existing["attempts"].append(data)
+
+    # Save back
+    with open(filename, "w") as f:
+        json.dump(existing, f, indent=4)
+
+
 def running_quiz():
     print(welcoming())
     score = 0
@@ -62,7 +95,7 @@ def running_quiz():
     start_time = time.time()
 
     for question in questions:
-        print(f"Question: {question["question"]}")
+        print(f"Question: {question['question']}")
         for i, option in enumerate(question["options"], start=1):
             print(f"{i}. {option}")
 
@@ -88,24 +121,25 @@ def running_quiz():
 
     see_full_report = input("Do you want to see the full report again (yes/no): ").strip().lower()
 
+    if see_full_report in ["yes", "y","Yes","YES"]:
+        report = show_score_report(score, len(questions), total_time)
+
+        save_choice = input("Do you want to save the report in a file (yes/no): ").strip().lower()
+        if save_choice in ["yes", "y","Yes","YES"]:
+            filename = input("Enter your filename: ")
+            path_filename = pathlib.Path(filename+".txt")
 
 
+            if path_filename.exists():
+                print("File already exists")
+                with open(f"{filename}.txt", "a") as f:
+                    f.write(report)
+            elif not path_filename.exists():
+                with open(f"{filename}.txt", "a") as f:
+                    f.write(report)
 
+            save_results_json(score, len(questions), total_time)
 
-    # Ask user if they want to see the full report again
-
-
-
-    if  see_full_report in ["yes", "y", "Yes", "YES"]:
-        result = show_score_report(score, len(questions), total_time)
-        print(result)
-        do_want_to_save_the_result = input("Do you want to save the report in a file:")
-        if do_want_to_save_the_result in ["yes", "y", "Yes", "YES"]:
-            filename = input("Enter your filename:")
-            with open(f"{filename}.txt", "a") as f:
-                f.write(show_score_report(score, len(questions), total_time))
-        else:
-            pass
     else:
         print("END")
 
