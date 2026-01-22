@@ -80,7 +80,7 @@ def running_quiz():
         user_input = input("Select your answer from (1-4) and press q to quit:")
 
     
-        if user_input == question["answer"]:#
+        if user_input == question["answer"]:
             print("✅ Correct!")
             score += 1
         elif user_input == 'q':
