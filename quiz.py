@@ -1,107 +1,121 @@
-from questions import question_1, question_2,question_3,question_4,question_5
-from options import option_1, option_2, option_3, option_4, option_5
 import argparse
 import sys
-
-
-"""
-HOLTON COLLEGE QUIZ - MODULE IMPORTS
-1. Load quiz questions and options from local data files.
-2. Utilize 'argparse' to provide a professional Command Line Interface (CLI).
-"""
+import random
+import time
 
 
 def welcoming():
-
-    return f"""
+    return """
 
     Welcome to the Holton College Quiz!
-    
-    Please answer the questions with letters given (1, 2,3 or 4) of your choice.
 
-    if you need help, type: python3 quiz.py --help
+    Please answer the questions with numbers (1, 2, 3 or 4).
+
+    If you need help, type: python3 quiz.py --help
     """
-
-
-
-
 
 
 def get_questions():
-    """
-    Return a list of questions
-    each questions is stored in a dictonary    
-    """
-
- 
-
     return [
-        {
-            "question": question_1,
-            "options": option_1,
-            "answer": "3"
-        },
-        {
-            "question": question_2,
-            "options": option_2,
-            "answer": "2"
-        },
-        {
-            "question": question_3,
-            "options": option_3,
-            "answer": "1"
-        },
-        {
-            "question": question_4,
-            "options": option_4,
-            "answer": "3"
-        },
-        {
-            "question": question_5,
-            "options": option_5,
-            "answer": "4"
-        }
+        {"question": "8^0", "answer": 1, "options": ["1", "0", "8", "0.5"]},
+        {"question": "42 / 7", "answer": 2, "options": ["5", "6", "7", "8"]},
+        {"question": "190 + (-30)", "answer": 3, "options": ["220", "60", "160", "70"]},
+        {"question": "6^2", "answer": 4, "options": ["22", "12", "16", "36"]},
+        {"question": "7 * 7", "answer": 1, "options": ["49", "47", "46", "42"]},
+        {"question": "121^(1/2)", "answer": 2, "options": ["10", "11", "12", "13"]},
+        {"question": "21 / 3", "answer": 1, "options": ["7", "8", "9", "6"]},
+        {"question": "10^3", "answer": 3, "options": ["10", "10000", "1000", "100"]},
+        {"question": "11 * 11", "answer": 2, "options": ["111", "121", "130", "120"]},
+        {"question": "12^2", "answer": 2, "options": ["141", "144", "151", "120"]},
+        {"question": "15 * 5", "answer": 3, "options": ["65", "80", "75", "70"]},
+        {"question": "72 / 8", "answer": 4, "options": ["8", "6", "7", "9"]},
+        {"question": "16 * 3", "answer": 3, "options": ["46", "44", "48", "42"]},
+        {"question": "17 - 19", "answer": 2, "options": ["2", "-2", "0", "1"]},
+        {"question": "9^2", "answer": 4, "options": ["17", "11", "18", "81"]},
     ]
 
 
+def show_score_report(score, total_questions, total_time):
+    percentage = (score / total_questions) * 100
+    incorrect = total_questions - score
 
+    report = (
+        "\n=== SCORE REPORT ===\n"
+        f"Correct answers:   {score}\n"
+        f"Incorrect answers: {incorrect}\n"
+        f"Total questions:   {total_questions}\n"
+        f"Percentage:        {percentage:.2f}%\n"
+        f"Time taken:        {total_time:.2f} seconds\n"
+        "====================\n"
+    )
 
+    print(report)
+    return report
 
 
 def running_quiz():
     print(welcoming())
-    score:int = 0
+    score = 0
     questions = get_questions()
+    random.shuffle(questions)
+
+    start_time = time.time()
 
     for question in questions:
-        print(question["question"])
-        for options in question["options"]:
-            print(options)
-        user_input = input("Select your answer from (1-4) and press q to quit:")
+        print("\nQuestion:", question["question"])
+        for i, option in enumerate(question["options"], start=1):
+            print(f"{i}. {option}")
 
-    
-        if user_input == question["answer"]:
+        user_input = input("Select your answer (1-4) or press q to quit: ")
+
+        if user_input.lower() == "q":
+            sys.exit()
+
+        if not user_input.isdigit():
+            print("Invalid input. Please enter a number between 1 and 4.")
+            continue
+
+        if int(user_input) == question["answer"]:
             print("✅ Correct!")
             score += 1
-        elif user_input == 'q':
-            sys.exit()
         else:
-             print(f"❌ Wrong!")
+            print("❌ Wrong!")
+
+    end_time = time.time()
+    total_time = end_time - start_time
+
+    print(f"\nFinal Score: You scored {score} out of {len(questions)}")
+
+    see_full_report = input("Do you want to see the full report again (yes/no): ").strip().lower()
 
 
 
-    print(f"Final Score: You scored {score} out of {len(questions)}")
+
+
+    # Ask user if they want to see the full report again
+
+
+
+    if  see_full_report in ["yes", "y", "Yes", "YES"]:
+        result = show_score_report(score, len(questions), total_time)
+        print(result)
+        do_want_to_save_the_result = input("Do you want to save the report in a file:")
+        if do_want_to_save_the_result in ["yes", "y", "Yes", "YES"]:
+            filename = input("Enter your filename:")
+            with open(f"{filename}.txt", "a") as f:
+                f.write(show_score_report(score, len(questions), total_time))
+        else:
+            pass
+    else:
+        print("END")
+
     print("Thanks for taking the quiz!")
 
 
-
-
-
 if __name__ == "__main__":
-    help_description = "An interactive command-line quiz program for Holton College."
-    
-    parser = argparse.ArgumentParser(description=help_description)
-
+    parser = argparse.ArgumentParser(
+        description="An interactive command-line quiz program for Holton College."
+    )
     args = parser.parse_args()
 
     running_quiz()
