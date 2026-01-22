@@ -40,13 +40,13 @@ def show_score_report(score, total_questions, total_time):
     incorrect = total_questions - score
 
     report = (
-        "\n=== SCORE REPORT ===\n"
+        "\nSCORE REPORT\n"
         f"Correct answers:   {score}\n"
         f"Incorrect answers: {incorrect}\n"
         f"Total questions:   {total_questions}\n"
         f"Percentage:        {percentage:.2f}%\n"
         f"Time taken:        {total_time:.2f} seconds\n"
-        "====================\n"
+        "\n"
     )
 
     print(report)
@@ -62,7 +62,7 @@ def running_quiz():
     start_time = time.time()
 
     for question in questions:
-        print("\nQuestion:", question["question"])
+        print(f"Question: {question["question"]}")
         for i, option in enumerate(question["options"], start=1):
             print(f"{i}. {option}")
 
@@ -84,7 +84,7 @@ def running_quiz():
     end_time = time.time()
     total_time = end_time - start_time
 
-    print(f"\nFinal Score: You scored {score} out of {len(questions)}")
+    print(f"Final Score: You scored {score} out of {len(questions)}")
 
     see_full_report = input("Do you want to see the full report again (yes/no): ").strip().lower()
 
