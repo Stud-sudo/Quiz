@@ -52,7 +52,7 @@ def get_questions():
             "answer": "1"
         },
         {
-            "question": question_3,
+            "question": question_4,
             "options": option_4,
             "answer": "3"
         },
@@ -66,10 +66,7 @@ def get_questions():
 
 
 
-"""
-This function is for later purpose only
 
-"""
 
 def running_quiz():
     print(welcoming())
@@ -80,7 +77,7 @@ def running_quiz():
         print(question["question"])
         for options in question["options"]:
             print(options)
-        user_input = input("Select your anwer from (1-4) and press q to quit:")
+        user_input = input("Select your answer from (1-4) and press q to quit:")
 
     
         if user_input == question["answer"]:#
