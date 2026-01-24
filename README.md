@@ -3,6 +3,7 @@
 This repository contains my Python implementation for the Holton College digital transformation project. It’s a Proof of Concept (PoC) designed to show how the college can move away from paper tests and use a digital math quiz instead.
 
 ### Student Details
+* **Student Name:** Adaresh Rajendran
 * **Student Number:** 25165912
 * **Module Code:** COM4402
 * **Project:** Proof of Concept (PoC) Digital Quiz
